@@ -1,0 +1,61 @@
+{
+  "appId": "com.activiti.ActivitiModeler",
+  "productName": "Activiti Modeler",
+  "files": [
+    {
+      "filter": [
+        "**",
+        "!**/__tests__",
+        "!test",
+        "!dev.js"
+      ]
+    }
+  ],
+  "afterPack": "./tasks/after-pack.js",
+  "win": {
+    "target": [
+      {
+        "target": "zip",
+        "arch": [ "x64", "ia32" ]
+      }
+    ]
+  },
+  "linux": {
+    "category": "Development",
+    "target": [
+      {
+        "target": "tar.gz",
+        "arch": [ "x64", "ia32" ]
+      }
+    ]
+  },
+  "mac": {
+    "target": [
+      "dmg",
+      "zip"
+    ]
+  },
+  "fileAssociations": [
+    {
+      "ext": "bpmn",
+      "name": "ActivitiModeler.BPMN",
+      "description": "BPMN file",
+      "role": "Editor",
+      "mimeType": "application/bpmn"
+    },
+    {
+      "ext": "dmn",
+      "name": "ActivitiModeler.DMN",
+      "description": "DMN file",
+      "role": "Editor",
+      "mimeType": "application/dmn"
+    },
+    {
+      "ext": "cmmn",
+      "name": "ActivitiModeler.CMMN",
+      "description": "CMMN file",
+      "role": "Editor",
+      "mimeType": "application/cmmn"
+    }
+  ]
+}

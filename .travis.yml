@@ -1,0 +1,85 @@
+cache:
+  directories:
+    - "$HOME/.npm"
+    - "$HOME/.cache/electron"
+    - "$HOME/.cache/electron-builder"
+
+jobs:
+  include:
+    - stage: test
+      node_js: node
+      language: node_js
+      script:
+      - COVERAGE=1 npm run all -- --x64 --no-compress
+      - npx codecov
+    - stage: "distro [windows+linux]"
+      os: linux
+      services: docker
+      language: generic
+      script:
+      - |
+        ENVS=`env | grep -iE '^(DEBUG|NODE_|ELECTRON_|NPM_|CI|TRAVIS|WIN_CSC_|CSC_|GH_|AWS_|BUILD_)([A-Z]|_)*=' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
+        docker run $ENVS --rm \
+          -v ${PWD}:/project \
+          -v ~/.cache/electron:/root/.cache/electron \
+          -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+          electronuserland/builder:wine \
+          /bin/bash -c "npm i && npm run build -- --win --linux --publish"
+    - stage: "distro [macos]"
+      os: osx
+      osx_image: xcode9
+      node_js: node
+      language: node_js
+      env:
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+      script: npm run build -- --mac --publish
+    - stage: "post distro"
+      node_js: node
+      language: node_js
+      git:
+        depth: false
+      script:
+      - npm run send-license-book-summary
+    - stage: "nightly build [windows+linux]"
+      os: linux
+      services: docker
+      language: generic
+      script:
+      - |
+        git checkout -b build-nightly
+        ENVS=`env | grep -iE '^(DEBUG|NODE_|ELECTRON_|NPM_|CI|TRAVIS|WIN_CSC_|CSC_|GH_|AWS_|BUILD_)([A-Z]|_)*=' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
+        docker run $ENVS --rm \
+          -v ${PWD}:/project \
+          -v ~/.cache/electron:/root/.cache/electron \
+          -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+          electronuserland/builder:wine \
+          /bin/bash -c "npm i && npm run build -- --win --linux --nightly --publish"
+    - stage: "nightly build [macos]"
+      os: osx
+      osx_image: xcode9
+      node_js: node
+      language: node_js
+      env:
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+      script:
+      - |
+        git checkout -b build-nightly
+        npm run build -- --mac --nightly --publish
+
+before_cache:
+  - rm -rf "$HOME/.cache/electron-builder/wine"
+
+stages:
+  - test
+  - name: "distro [windows+linux]"
+    if: tag =~ ^v\d
+  - name: "distro [macos]"
+    if: tag =~ ^v\d
+  - name: "post distro"
+    if: tag =~ ^v\d
+  - name: "nightly build [windows+linux]"
+    if: type IN (cron)
+  - name: "nightly build [macos]"
+    if: type IN (cron)

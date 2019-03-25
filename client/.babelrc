@@ -1,0 +1,29 @@
+{
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "modules": false,
+        "targets": {
+          "chrome": "66"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "env": {
+    "coverage": {
+      "plugins": [
+        [ "istanbul", {
+          "exclude": [
+            "**/__tests__/**",
+            "**/test/**"
+          ]
+        } ]
+      ]
+    }
+  }
+}
