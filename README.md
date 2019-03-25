@@ -1,4 +1,4 @@
-# Unofficial Activiti Modeler
+# Unofficial Activiti Modeler Electron Application
 
 [![Build Status](https://travis-ci.org/igdianov/activiti-modeler.svg?branch=master)](https://travis-ci.org/igdianov/activiti-modeler)
 
