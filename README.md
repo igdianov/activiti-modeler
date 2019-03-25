@@ -1,4 +1,4 @@
-# Activiti Modeler
+# Unofficial Activiti Modeler
 
 [![Build Status](https://travis-ci.org/igdianov/activiti-modeler.svg?branch=master)](https://travis-ci.org/igdianov/activiti-modeler)
 
