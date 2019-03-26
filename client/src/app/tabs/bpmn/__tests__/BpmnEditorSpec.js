@@ -27,7 +27,7 @@ import BpmnModeler from 'test/mocks/bpmn-js/Modeler';
 
 import diagramXML from './diagram.bpmn';
 import activitiXML from './activiti.bpmn';
-import activitiConvertedXML from './activitiConverted.bpmn';
+// import activitiConvertedXML from './activitiConverted.bpmn';
 
 import {
   getCanvasEntries,
@@ -550,7 +550,7 @@ describe('<BpmnEditor>', function() {
 
 
   describe('#handleNamespace', function() {
-
+    /*
     it('should replace namespace', function(done) {
 
       // given
@@ -576,7 +576,7 @@ describe('<BpmnEditor>', function() {
         }
       }
     });
-
+    */
 
     it('should not convert the diagram if declined', function(done) {
 

@@ -55,11 +55,11 @@ import {
 import Metadata from '../../../util/Metadata';
 
 
-const NAMESPACE_URL_ACTIVITI = 'http://activiti.org/bpmn';
+const NAMESPACE_URL_CAMUNDA = 'http://camunda.org/schema/1.0/bpmn';
 
-const NAMESPACE_CAMUNDA = {
-  uri: 'http://camunda.org/schema/1.0/bpmn',
-  prefix: 'camunda'
+const NAMESPACE_ACTIVITI = {
+  uri: 'http://activiti.org/bpmn',
+  prefix: 'activiti'
 };
 
 const EXPORT_AS = [ 'png', 'jpeg', 'svg' ];
@@ -267,7 +267,7 @@ export class BpmnEditor extends CachedComponent {
 
 
   handleNamespace = async (xml) => {
-    const used = findNamespaceUsages(xml, NAMESPACE_URL_ACTIVITI);
+    const used = findNamespaceUsages(xml, NAMESPACE_URL_CAMUNDA);
 
     if (!used) {
       return xml;
@@ -283,7 +283,7 @@ export class BpmnEditor extends CachedComponent {
       onContentUpdated
     } = this.props;
 
-    const convertedXML = await replaceNamespaceUsages(xml, used, NAMESPACE_CAMUNDA);
+    const convertedXML = await replaceNamespaceUsages(xml, used, NAMESPACE_ACTIVITI);
 
     onContentUpdated(convertedXML);
 
@@ -857,16 +857,14 @@ class Color extends Component {
 function getNamespaceDialog() {
   return {
     type: 'warning',
-    title: 'Deprecated <activiti> namespace detected',
+    title: 'Existing <camunda> namespace detected',
     buttons: [
       { id: 'cancel', label: 'Cancel' },
       { id: 'yes', label: 'Yes' }
     ],
-    message: 'Would you like to convert your diagram to the <camunda> namespace?',
+    message: 'Would you like to convert your diagram to the <activiti> namespace?',
     detail: [
-      'This will allow you to maintain execution related properties.',
-      '',
-      '<camunda> namespace support works from Camunda BPM versions 7.4.0, 7.3.3, 7.2.6 onwards.'
+      'This will allow you to maintain execution related properties.'
     ].join('\n')
   };
 }

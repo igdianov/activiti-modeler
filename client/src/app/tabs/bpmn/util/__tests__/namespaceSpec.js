@@ -24,11 +24,11 @@ import specialChars from './fixtures/specialChars.xml';
 import specialCharsExpected from './fixtures/specialChars-expected.xml';
 
 
-const NAMESPACE_URL_ACTIVITI = 'http://activiti.org/bpmn';
+const NAMESPACE_URL_CAMUNDA = 'http://camunda.org/schema/1.0/bpmn';
 
-const NAMESPACE_CAMUNDA = {
-  prefix: 'camunda',
-  uri: 'http://camunda.org/schema/1.0/bpmn'
+const NAMESPACE_ACTIVITI = {
+  prefix: 'activiti',
+  uri: 'http://activiti.org/bpmn'
 };
 
 
@@ -39,12 +39,12 @@ describe('util - namespace', function() {
     it('should detect namespace usage', function() {
 
       // when
-      const used = findUsages(activiti, NAMESPACE_URL_ACTIVITI);
+      const used = findUsages(activiti, NAMESPACE_URL_CAMUNDA);
 
       // then
       expect(used).to.eql({
-        uri: NAMESPACE_URL_ACTIVITI,
-        prefixes: ['activiti']
+        uri: NAMESPACE_URL_CAMUNDA,
+        prefixes: ['camunda']
       });
     });
 
@@ -52,11 +52,11 @@ describe('util - namespace', function() {
     it('should detect targetNamespace usage', function() {
 
       // when
-      const used = findUsages(activitiCamunda, NAMESPACE_URL_ACTIVITI);
+      const used = findUsages(activitiCamunda, NAMESPACE_URL_CAMUNDA);
 
       // then
       expect(used).to.eql({
-        uri: NAMESPACE_URL_ACTIVITI,
+        uri: NAMESPACE_URL_CAMUNDA,
         prefixes: []
       });
     });
@@ -65,7 +65,7 @@ describe('util - namespace', function() {
     it('should indicate not found', function() {
 
       // when
-      const used = findUsages(diagram, NAMESPACE_URL_ACTIVITI);
+      const used = findUsages(diagram, NAMESPACE_URL_CAMUNDA);
 
       // then
       expect(used).to.be.false;
@@ -75,7 +75,7 @@ describe('util - namespace', function() {
     it('should indicate not found in case of an error', function() {
 
       // when
-      const used = findUsages('error>', NAMESPACE_URL_ACTIVITI);
+      const used = findUsages('error>', NAMESPACE_URL_CAMUNDA);
 
       // then
       expect(used).to.be.false;
@@ -85,12 +85,12 @@ describe('util - namespace', function() {
     it('should find prefix with special chars', function() {
 
       // when
-      const used = findUsages(specialChars, NAMESPACE_URL_ACTIVITI);
+      const used = findUsages(specialChars, NAMESPACE_URL_CAMUNDA);
 
       // then
       expect(used).to.eql({
-        prefixes: [ 'activiti', 'a.b' ],
-        uri: 'http://activiti.org/bpmn'
+        prefixes: [ 'camunda', 'a.b' ],
+        uri: 'http://camunda.org/schema/1.0/bpmn'
       });
     });
 
@@ -99,48 +99,48 @@ describe('util - namespace', function() {
 
   describe('replaceUsages', function() {
 
-    it('should replace cctiviti namespace with camunda', function() {
+    it('should replace camunda namespace with activiti', function() {
 
       // given
       const used = {
-        prefixes: [ 'activiti' ],
-        uri: NAMESPACE_URL_ACTIVITI
+        prefixes: [ 'camunda' ],
+        uri: NAMESPACE_URL_CAMUNDA
       };
 
       // when
-      const result = replaceUsages(activiti, used, NAMESPACE_CAMUNDA);
+      const result = replaceUsages(activiti, used, NAMESPACE_ACTIVITI);
 
       // then
       expect(result).to.eql(activitiExpected);
     });
 
 
-    it('should not replace camunda prefix', function() {
+    it('should not replace activiti prefix', function() {
 
       // given
       const used = {
         prefixes: [],
-        uri: 'http://activiti.org/bpmn'
+        uri: 'http://camunda.org/schema/1.0/bpmn'
       };
 
       // when
-      const result = replaceUsages(activitiCamunda, used, NAMESPACE_CAMUNDA);
+      const result = replaceUsages(activitiCamunda, used, NAMESPACE_ACTIVITI);
 
       // then
       expect(result).to.eql(activitiCamundaExpected);
     });
 
 
-    it('should replace activiti namespace in complex diagram', function() {
+    it('should replace camunda namespace in complex diagram', function() {
 
       // given
       const used = {
-        prefixes: [ 'activiti' ],
-        uri: 'http://activiti.org/bpmn'
+        prefixes: [ 'camunda' ],
+        uri: 'http://camunda.org/schema/1.0/bpmn'
       };
 
       // when
-      const result = replaceUsages(activitiComplex, used, NAMESPACE_CAMUNDA);
+      const result = replaceUsages(activitiComplex, used, NAMESPACE_ACTIVITI);
 
       // then
       expect(result).to.eql(activitiComplexExpected);
@@ -150,12 +150,12 @@ describe('util - namespace', function() {
     it('should handle special chars', function() {
       // given
       const used = {
-        prefixes: [ 'activiti', 'a.b' ],
-        uri: 'http://activiti.org/bpmn'
+        prefixes: [ 'camunda', 'a.b' ],
+        uri: 'http://camunda.org/schema/1.0/bpmn'
       };
 
       // when
-      const result = replaceUsages(specialChars, used, NAMESPACE_CAMUNDA);
+      const result = replaceUsages(specialChars, used, NAMESPACE_ACTIVITI);
 
       // then
       expect(result).to.eql(specialCharsExpected);
