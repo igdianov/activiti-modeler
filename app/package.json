@@ -1,6 +1,6 @@
 {
   "name": "activiti-modeler",
-  "version": "3.0.0-beta.4",
+  "version": "3.0.0-beta",
   "description": "Activiti Modeler for BPMN, DMN and CMMN, based on bpmn.io",
   "private": true,
   "main": "lib/index.js",
