@@ -13,14 +13,14 @@
         "editable": false,
         "binding": {
           "type": "property",
-          "name": "camunda:class"
+          "name": "activiti:class"
         }
       },
       {
         "label": "Sender",
         "type": "String",
         "binding": {
-          "type": "camunda:inputParameter",
+          "type": "activiti:inputParameter",
           "name": "sender"
         },
         "constraints": {
@@ -35,7 +35,7 @@
         "label": "Receivers",
         "type": "String",
         "binding": {
-          "type": "camunda:inputParameter",
+          "type": "activiti:inputParameter",
           "name": "receivers"
         },
         "constraints": {
@@ -48,7 +48,7 @@
         "value": "Hello ${firstName}!",
         "type": "Text",
         "binding": {
-          "type": "camunda:inputParameter",
+          "type": "activiti:inputParameter",
           "name": "messageBody",
           "scriptFormat": "freemarker"
         },
@@ -62,7 +62,7 @@
         "type": "String",
         "value": "mailSendResult",
         "binding": {
-          "type": "camunda:outputParameter",
+          "type": "activiti:outputParameter",
           "source": "${ resultStatus }"
         }
       },
@@ -72,7 +72,7 @@
         "value": true,
         "binding": {
           "type": "property",
-          "name": "camunda:asyncBefore"
+          "name": "activiti:asyncBefore"
         }
       }
     ]
@@ -85,7 +85,7 @@
     ],
     "properties": [],
     "scopes": {
-      "camunda:Connector": {
+      "activiti:Connector": {
         "properties": [
           {
             "label": "ConnectorId",
@@ -101,7 +101,7 @@
             "type": "String",
             "value": "GET",
             "binding": {
-              "type": "camunda:inputParameter",
+              "type": "activiti:inputParameter",
               "name": "method"
             }
           },
@@ -110,7 +110,7 @@
             "type": "String",
             "value": "https://bpmn.io",
             "binding": {
-              "type": "camunda:inputParameter",
+              "type": "activiti:inputParameter",
               "name": "url"
             }
           },
@@ -119,7 +119,7 @@
             "type": "String",
             "value": "wsResponse",
             "binding": {
-              "type": "camunda:outputParameter",
+              "type": "activiti:outputParameter",
               "source": "${S(response)}",
               "scriptFormat": "freemarker"
             }
@@ -141,7 +141,7 @@
         "value": true,
         "binding": {
           "type": "property",
-          "name": "camunda:asyncBefore"
+          "name": "activiti:asyncBefore"
         }
       }
     ],
@@ -164,7 +164,7 @@
         "value": "com.camunda.example.FooDelegate",
         "binding": {
           "type": "property",
-          "name": "camunda:delegateExpression"
+          "name": "activiti:delegateExpression"
         }
       }
     ],
@@ -214,7 +214,7 @@
         "description": "Specify the url of the web service to talk to.",
         "type": "String",
         "binding": {
-          "type": "camunda:property",
+          "type": "activiti:property",
           "name": "webServiceUrl"
         },
         "constraints": {
@@ -230,7 +230,7 @@
         "value": "com.camunda.example.WsCaller",
         "binding": {
           "type": "property",
-          "name": "camunda:class"
+          "name": "activiti:class"
         }
       }
     ]
@@ -249,7 +249,7 @@
         "value": "Walt, Jeff, Lisa",
         "binding": {
           "type": "property",
-          "name": "camunda:candidateUsers"
+          "name": "activiti:candidateUsers"
         },
         "constraints": {
           "notEmpty": true,
@@ -266,7 +266,7 @@
         "value": "Backoffice",
         "binding": {
           "type": "property",
-          "name": "camunda:candidateGroups"
+          "name": "activiti:candidateGroups"
         },
         "constraints": {
           "notEmpty": true,
@@ -287,7 +287,7 @@
         ],
         "binding": {
           "type": "property",
-          "name": "camunda:priority"
+          "name": "activiti:priority"
         }
       }
     ],
@@ -319,7 +319,7 @@
         "type": "String",
         "value": "var_local",
         "binding": {
-          "type": "camunda:in",
+          "type": "activiti:in",
           "target": "var_called_source"
         },
         "constraints": {
@@ -331,7 +331,7 @@
         "type": "String",
         "value": "var_called",
         "binding": {
-          "type": "camunda:out",
+          "type": "activiti:out",
           "source": "var_local_source"
         },
         "constraints": {
@@ -343,7 +343,7 @@
         "type": "String",
         "value": "${expr_local}",
         "binding": {
-          "type": "camunda:in",
+          "type": "activiti:in",
           "target": "var_called_expr",
           "expression": true
         },
@@ -356,7 +356,7 @@
         "type": "String",
         "value": "var_local_expr",
         "binding": {
-          "type": "camunda:out",
+          "type": "activiti:out",
           "sourceExpression": "${expr_called}"
         },
         "constraints": {
@@ -367,7 +367,7 @@
         "label": "Input all",
         "type": "Hidden",
         "binding": {
-          "type": "camunda:in",
+          "type": "activiti:in",
           "variables": "all"
         }
       },
@@ -375,7 +375,7 @@
         "label": "Output all",
         "type": "Hidden",
         "binding": {
-          "type": "camunda:out",
+          "type": "activiti:out",
           "variables": "all"
         }
       },
@@ -383,7 +383,7 @@
         "label": "Input all local",
         "type": "Hidden",
         "binding": {
-          "type": "camunda:in",
+          "type": "activiti:in",
           "variables": "local"
         }
       },
@@ -391,7 +391,7 @@
         "label": "Output all local",
         "type": "Hidden",
         "binding": {
-          "type": "camunda:out",
+          "type": "activiti:out",
           "variables": "local"
         }
       },
@@ -401,7 +401,7 @@
         "type": "String",
         "value": "${execution.processBusinessKey}",
         "binding": {
-          "type": "camunda:in:businessKey"
+          "type": "activiti:in:businessKey"
         }
       }
     ]
@@ -419,7 +419,7 @@
         "value": "println execution.eventName",
         "type": "Hidden",
         "binding": {
-          "type": "camunda:executionListener",
+          "type": "activiti:executionListener",
           "event": "start",
           "scriptFormat": "groovy"
         }
@@ -428,7 +428,7 @@
         "value": "println end",
         "type": "Hidden",
         "binding": {
-          "type": "camunda:executionListener",
+          "type": "activiti:executionListener",
           "event": "end",
           "scriptFormat": "groovy"
         }
@@ -459,7 +459,7 @@
         "type": "String",
         "value": "My Field Injection Value",
         "binding": {
-          "type": "camunda:field",
+          "type": "activiti:field",
           "name": "fieldInjectionString",
           "expression": false
         }
@@ -469,7 +469,7 @@
         "type": "String",
         "value": "${fieldInjectionExpression}",
         "binding": {
-          "type": "camunda:field",
+          "type": "activiti:field",
           "name": "fieldInjectionExpression",
           "expression": true
         }
