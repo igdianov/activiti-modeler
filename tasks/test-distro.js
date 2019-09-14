@@ -71,7 +71,7 @@ const expectedFiles = {
       name: 'activiti-modeler-${version}-linux-${arch}.tar.gz',
       archs,
       contents: [
-        'activiti-modeler-${version}-linux-${arch}/camunda-modeler',
+        'activiti-modeler-${version}-linux-${arch}/activiti-modeler',
         'activiti-modeler-${version}-linux-${arch}/support/xdg_register.sh',
         'activiti-modeler-${version}-linux-${arch}/VERSION'
       ]
