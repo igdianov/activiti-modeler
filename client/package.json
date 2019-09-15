@@ -1,6 +1,6 @@
 {
   "name": "activiti-modeler-client",
-  "version": "3.0.0-beta",
+  "version": "3.0.0-beta.7",
   "description": "Activiti Modeler client application",
   "private": true,
   "license": "MIT",
