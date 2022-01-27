@@ -13,7 +13,7 @@
   "dependencies": {
     "form-data": "^2.3.1",
     "glob": "^7.0.3",
-    "min-dash": "^3.4.0",
+    "min-dash": "^3.8.1",
     "mri": "^1.1.4",
     "node-fetch": "^2.1.2",
     "parents": "^1.0.1"
